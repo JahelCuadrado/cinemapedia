@@ -58,13 +58,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         
         slivers: [
     
-          const SliverAppBar(    
+        const SliverAppBar(    
             floating: true,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: CustomAppbar(),
+            flexibleSpace: CustomAppbar(),
             ),
-          ),
+          
     
         SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
@@ -110,17 +108,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 },
               ),
     
-              // Expanded(
-              //   child: ListView.builder(
-              //   itemCount: nowPlayingMovies.length,
-              //   itemBuilder: (context, index) {
-              //     final movie = nowPlayingMovies[index];
-              //     return ListTile(
-              //       title: Text(movie.title),
-              //     );
-              //   },
-              //   ),
-              // )
             ],
           );
         }, childCount: 1
