@@ -1,17 +1,20 @@
-
-
 import 'package:cinemapedia/presentation/screens/screens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/home/0',
   routes: [
     
     GoRoute(
-      path: '/',
+      path: '/home/:page',
       name: HomeScreen.name,
-      pageBuilder: (context, state) => const CupertinoPage(child: HomeScreen()),
+      pageBuilder: (context, state) {
+        
+        final pageIndex = (state.queryParameters['page'] ?? '0'); 
+
+        return CupertinoPage(child: HomeScreen(pageIndex: int.parse(pageIndex),));
+      },
 
       //Guardamos dentro del parámetros routes todas las rutas hijas
       routes: [
