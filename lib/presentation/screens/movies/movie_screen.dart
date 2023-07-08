@@ -20,6 +20,7 @@ class MovieScreen extends ConsumerStatefulWidget {
   MovieScreenState createState() => MovieScreenState();
 }
 
+
 class MovieScreenState extends ConsumerState<MovieScreen> {
 
   @override

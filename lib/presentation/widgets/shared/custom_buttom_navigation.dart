@@ -19,6 +19,7 @@ class CustomButtomNavigation extends StatelessWidget {
         break;
 
       case 2:
+        print('holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         context.go('/home/2');
         break;
     }

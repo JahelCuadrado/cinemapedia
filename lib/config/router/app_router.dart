@@ -11,9 +11,9 @@ final appRouter = GoRouter(
       name: HomeScreen.name,
       pageBuilder: (context, state) {
         
-        final pageIndex = (state.queryParameters['page'] ?? '0'); 
+        final pageIndex = int.parse(state.pathParameters['page'] ?? '0'); 
 
-        return CupertinoPage(child: HomeScreen(pageIndex: int.parse(pageIndex),));
+        return CupertinoPage(child: HomeScreen(pageIndex:pageIndex,));
       },
 
       //Guardamos dentro del parámetros routes todas las rutas hijas
@@ -30,8 +30,7 @@ final appRouter = GoRouter(
           //creamos la pantalla con el id
           return CupertinoPage(child: MovieScreen(movieId: movieId));
         } 
-        ),
-        
+        ), 
       ]
       ),
     
