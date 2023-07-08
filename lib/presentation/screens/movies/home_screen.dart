@@ -22,8 +22,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    print('HOME SCREEN: $pageIndex');
-
     return Scaffold(
       body: IndexedStack(
         index: pageIndex,

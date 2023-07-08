@@ -7,7 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> main() async {
   
-  await dotenv.load(fileName: ".env"); //TODO 3 variables de entorno, antes de esto se instala el paquete flutter_dotenv y se ha puesto el archivo de variables de entorno en assets
+  await dotenv.load(fileName: ".env");
+  
   runApp(
     const ProviderScope(child: MainApp())
   );
