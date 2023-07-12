@@ -31,9 +31,15 @@ final appRouter = GoRouter(
           return CupertinoPage(child: MovieScreen(movieId: movieId));
         } 
         ), 
+
       ]
       ),
     
+
+    GoRoute(
+        path: '/',
+        redirect: (_, __) => '/home/0'
+        ),
 
 
   ]
