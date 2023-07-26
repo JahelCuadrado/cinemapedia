@@ -1,6 +1,13 @@
 //La entidad es el objeto con el que yo voy a trabajar, no voy a trabajar con lo que venga de la API porque eso puede cambiar.
 
+import 'package:isar/isar.dart';
+part 'movie.g.dart';
+
+@collection
 class Movie {
+
+  Id? isarIid = Isar.autoIncrement;
+
   final bool adult;
   final String backdropPath;
   final List<String> genreIds;
