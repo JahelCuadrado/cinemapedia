@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-//TODO traer el nombre de las peliculas como tarea
 
 class FavoritesView extends ConsumerStatefulWidget {
   const FavoritesView({super.key});

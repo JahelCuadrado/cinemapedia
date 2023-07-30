@@ -8,14 +8,14 @@ import 'package:path_provider/path_provider.dart';
 class IsarLocalStorageDatasource extends LocalStorageDatasource{
 
   //Es un future porque la base de datos tiene que estar lista antes de manejar una base de datos.
-  late Future<Isar> db; //TODO database 1
+  late Future<Isar> db; 
 
-  IsarLocalStorageDatasource(){ //TODO database 2
+  IsarLocalStorageDatasource(){ 
   //Inicializamos la base de datos
    db = openDB();
   }
 
-  Future<Isar> openDB() async{ //TODO database 3
+  Future<Isar> openDB() async{ 
 
     //obtenemos gracias al paquete path_provider el directorio de datos por defecto de la aplaicación
     final dir = await getApplicationDocumentsDirectory();
