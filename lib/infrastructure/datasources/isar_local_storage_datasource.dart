@@ -80,6 +80,7 @@ Future<void> toggleFavorite(Movie movie) async {
   // Si la película es una favorita, eliminarla de la tabla "movies".
   if (favoriteMovie != null) {
     isar.writeTxnSync(() => isar.movies.deleteSync(favoriteMovie.isarIid!));
+    return;
   }
 
   // Si la película no es una favorita, agregarla a la tabla "movies".

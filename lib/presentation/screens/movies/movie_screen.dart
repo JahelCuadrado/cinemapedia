@@ -1,8 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
-import 'package:cinemapedia/presentation/providers/actors/actors_by_movie_provider.dart';
 import 'package:cinemapedia/presentation/providers/movies/movie_detail_provider.dart';
-import 'package:cinemapedia/presentation/providers/storage/local_storage_provider.dart';
+import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -226,19 +225,26 @@ class _CustomSliverAppbar extends ConsumerWidget {
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
       actions: [
-        IconButton(onPressed: (){
+        IconButton(onPressed: () async{
           
-          ref.watch(localStorageRepositoryProvider).toggleFavorite(movie);
+          //ref.read(localStorageRepositoryProvider).toggleFavorite(movie);
+
+          print(isFavoriteFuture.value);
+
+          await ref.read(favoriteMoviesProvider.notifier).toggleFavorite(movie);
 
           ref.invalidate(isFavoriteProvider(movie.id));
 
+
+
         }, icon: isFavoriteFuture.when(
+          loading: ()=> const CircularProgressIndicator(strokeWidth: 2,),
           data: (isFavorite) => isFavorite
           ? const Icon(Icons.favorite_rounded, color: Colors.red,)
           : const Icon(Icons.favorite_border)
           , 
           error: (_,__) => throw UnimplementedError(), 
-          loading: ()=> const CircularProgressIndicator(strokeWidth: 2,)
+
           ))
         
         //const Icon(Icons.favorite_border))

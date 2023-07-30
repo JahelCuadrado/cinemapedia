@@ -1,6 +1,8 @@
 import 'package:cinemapedia/presentation/providers/providers.dart';
+import 'package:cinemapedia/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 //TODO traer el nombre de las peliculas como tarea
 
@@ -13,10 +15,27 @@ class FavoritesView extends ConsumerStatefulWidget {
 
 class _FavoritesViewState extends ConsumerState<FavoritesView> {
 
+  bool isLastPage = false;
+  bool isLoading = false;
+
 @override
   void initState() {
     super.initState();
     ref.read(favoriteMoviesProvider.notifier).loadNextPage();
+  }
+
+  void loadNextPage() async {
+
+    if ( isLoading || isLastPage ) return;
+    isLoading = true;
+
+    final movies = await ref.read(favoriteMoviesProvider.notifier).loadNextPage();
+    isLoading = false;
+
+    if(movies.isEmpty){
+      isLastPage = true;
+    }
+
   }
 
   @override
@@ -24,23 +43,38 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
 
     final favoritesMovies = ref.watch(favoriteMoviesProvider).values.toList();
 
+    if ( favoritesMovies.isEmpty) {
+
+      final colors = Theme.of(context).colorScheme;
+
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+
+            Icon( Icons.favorite_outline_sharp, size: 60, color: colors.primary,),
+            Text('Oh nooo!!', style: TextStyle(fontSize: 30, color: colors.primary)),
+            const Text('No tienes películas favoritas', style: TextStyle(fontSize: 30, color: 
+            Colors.black45)),
+
+            //! botón que lleva al usuario a inicio
+            const SizedBox(height: 20,),
+            FilledButton.tonal(
+              onPressed: () => context.go('/home/0'), 
+              child: const Text('Descubrir películas')
+              )
+
+
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Favorites Views'),
-      ),
-      body: ListView.builder(
-        itemCount: favoritesMovies.length,
-        itemBuilder: (context, index){
-
-          final movie = favoritesMovies[index];
-
-          return ListTile(
-            title: 
-            Text(movie.title)
-            ,
-          );
-        }
+      body: MovieMasonry(
+        loadNextPage: loadNextPage,
+        movies: favoritesMovies
         )
     );
   }
